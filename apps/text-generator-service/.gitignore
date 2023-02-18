@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# IDE files
+.idea/
+.vscode/
+
+# MacOS
+*.DS_Store
+
+.env.*
+
+# Local dataset storage
+datasets/*
