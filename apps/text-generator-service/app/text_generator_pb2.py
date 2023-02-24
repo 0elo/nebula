@@ -7,41 +7,48 @@ from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18\x61pp/text_generator.proto\x12\x0etext_generator\"#\n\x11TextPromptRequest\x12\x0e\n\x06prompt\x18\x01 \x01(\t\"%\n\x12TextPromptResponse\x12\x0f\n\x07message\x18\x01 \x01(\t2f\n\rTextGenerator\x12U\n\nSendPrompt\x12!.text_generator.TextPromptRequest\x1a\".text_generator.TextPromptResponse\"\x00\x62\x06proto3')
-
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b'\n\x18\x61pp/text_generator.proto\x12\x0etext_generator\"#\n\x11TextPromptRequest\x12\x0e\n\x06prompt\x18\x01 \x01(\t\"%\n\x12TextPromptResponse\x12\x0f\n\x07message\x18\x01 \x01(\t2f\n\rTextGenerator\x12U\n\nSendPrompt\x12!.text_generator.TextPromptRequest\x1a\".text_generator.TextPromptResponse\"\x00\x62\x06proto3'
+)
 
 
 _TEXTPROMPTREQUEST = DESCRIPTOR.message_types_by_name['TextPromptRequest']
 _TEXTPROMPTRESPONSE = DESCRIPTOR.message_types_by_name['TextPromptResponse']
-TextPromptRequest = _reflection.GeneratedProtocolMessageType('TextPromptRequest', (_message.Message,), {
-  'DESCRIPTOR' : _TEXTPROMPTREQUEST,
-  '__module__' : 'app.text_generator_pb2'
-  # @@protoc_insertion_point(class_scope:text_generator.TextPromptRequest)
-  })
+TextPromptRequest = _reflection.GeneratedProtocolMessageType(
+    'TextPromptRequest',
+    (_message.Message,),
+    {
+        'DESCRIPTOR': _TEXTPROMPTREQUEST,
+        '__module__': 'app.text_generator_pb2'
+        # @@protoc_insertion_point(class_scope:text_generator.TextPromptRequest)
+    },
+)
 _sym_db.RegisterMessage(TextPromptRequest)
 
-TextPromptResponse = _reflection.GeneratedProtocolMessageType('TextPromptResponse', (_message.Message,), {
-  'DESCRIPTOR' : _TEXTPROMPTRESPONSE,
-  '__module__' : 'app.text_generator_pb2'
-  # @@protoc_insertion_point(class_scope:text_generator.TextPromptResponse)
-  })
+TextPromptResponse = _reflection.GeneratedProtocolMessageType(
+    'TextPromptResponse',
+    (_message.Message,),
+    {
+        'DESCRIPTOR': _TEXTPROMPTRESPONSE,
+        '__module__': 'app.text_generator_pb2'
+        # @@protoc_insertion_point(class_scope:text_generator.TextPromptResponse)
+    },
+)
 _sym_db.RegisterMessage(TextPromptResponse)
 
 _TEXTGENERATOR = DESCRIPTOR.services_by_name['TextGenerator']
-if _descriptor._USE_C_DESCRIPTORS == False:
-
-  DESCRIPTOR._options = None
-  _TEXTPROMPTREQUEST._serialized_start=44
-  _TEXTPROMPTREQUEST._serialized_end=79
-  _TEXTPROMPTRESPONSE._serialized_start=81
-  _TEXTPROMPTRESPONSE._serialized_end=118
-  _TEXTGENERATOR._serialized_start=120
-  _TEXTGENERATOR._serialized_end=222
+if _descriptor._USE_C_DESCRIPTORS is False:
+    DESCRIPTOR._options = None
+    _TEXTPROMPTREQUEST._serialized_start = 44
+    _TEXTPROMPTREQUEST._serialized_end = 79
+    _TEXTPROMPTRESPONSE._serialized_start = 81
+    _TEXTPROMPTRESPONSE._serialized_end = 118
+    _TEXTGENERATOR._serialized_start = 120
+    _TEXTGENERATOR._serialized_end = 222
 # @@protoc_insertion_point(module_scope)

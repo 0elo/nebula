@@ -1,4 +1,5 @@
 import keras.models
+import keras
 
 from nebula_src.models import gpt
 
@@ -11,7 +12,7 @@ batch_size = 128
 
 
 def train_and_generate():
-    model = gpt.model.create_model(
+    model: keras.Model = gpt.model.create_model(
         embed_dim=embed_dim,
         feed_forward_dim=feed_forward_dim,
         max_seq_size=max_seq_size,
@@ -24,9 +25,9 @@ def train_and_generate():
     text_gen = gpt.generate.generate_text_gen_callback(max_seq_size=max_seq_size, prompt='hello world', vocab=vocab)
     print('Text generator callback created.')
     model.fit(ds, verbose=2, epochs=25, callbacks=[text_gen])
-
+    model.
     model.save('nebula_models/gpt')
-
+    model.predict()
 
 def load():
     return keras.models.load_model('nebula_models/gpt')

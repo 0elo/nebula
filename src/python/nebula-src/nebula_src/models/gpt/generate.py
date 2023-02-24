@@ -1,10 +1,6 @@
-import typing
-
-import tensorflow as tf
 import keras
-from keras import layers, callbacks
-
 import numpy as np
+import tensorflow as tf
 
 
 class TextGenerator(keras.callbacks.Callback):
@@ -21,9 +17,7 @@ class TextGenerator(keras.callbacks.Callback):
         print_every: Integer, print after this many epochs.
     """
 
-    def __init__(
-        self, max_tokens, max_seq_size, start_tokens, index_to_word, top_k=10, print_every=1
-    ):
+    def __init__(self, max_tokens, max_seq_size, start_tokens, index_to_word, top_k=10, print_every=1):
         self.max_tokens = max_tokens
         self.max_seq_size = max_seq_size
         self.start_tokens = start_tokens
@@ -51,7 +45,7 @@ class TextGenerator(keras.callbacks.Callback):
             pad_len = self.max_seq_size - len(start_tokens)
             sample_index = len(start_tokens) - 1
             if pad_len < 0:
-                x = start_tokens[:self.max_seq_size]
+                x = start_tokens[: self.max_seq_size]
                 sample_index = self.max_seq_size - 1
             elif pad_len > 0:
                 x = start_tokens + [0] * pad_len
@@ -63,9 +57,7 @@ class TextGenerator(keras.callbacks.Callback):
             tokens_generated.append(sample_token)
             start_tokens.append(sample_token)
             num_tokens_generated = len(tokens_generated)
-        txt = " ".join(
-            [self.detokenize(_) for _ in self.start_tokens + tokens_generated]
-        )
+        txt = " ".join([self.detokenize(_) for _ in self.start_tokens + tokens_generated])
         print(f"generated text:\n{txt}\n")
 
 
@@ -82,5 +74,7 @@ def generate_text_gen_callback(max_seq_size: int, prompt: str, vocab: list[str])
     word_to_index = generate_word_to_index_map(vocab=vocab)
     start_tokens = [word_to_index.get(_, 1) for _ in prompt.split()]
     num_tokens_generated = 40
-    text_gen = TextGenerator(max_tokens=num_tokens_generated, max_seq_size=max_seq_size, start_tokens=start_tokens, index_to_word=vocab)
+    text_gen = TextGenerator(
+        max_tokens=num_tokens_generated, max_seq_size=max_seq_size, start_tokens=start_tokens, index_to_word=vocab
+    )
     return text_gen

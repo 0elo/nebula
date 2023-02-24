@@ -1,10 +1,10 @@
+import os
+import random
+import string
+import typing
+
 import tensorflow as tf
 from keras import layers
-
-import os
-import string
-import random
-import typing
 
 
 # batch_size = 128
@@ -47,7 +47,7 @@ def _create_dataset_from_text_files(batch_size: int, file_names: list[str]) -> t
 
 
 def _custom_standardization(input_string: str) -> str:
-    """ Remove html line-break tags and handle punctuation """
+    """Remove html line-break tags and handle punctuation"""
     lowercased = tf.strings.lower(input_string)
     stripped_html = tf.strings.regex_replace(lowercased, "<br />", " ")
     return tf.strings.regex_replace(stripped_html, f"([{string.punctuation}])", r" \1")
@@ -69,15 +69,12 @@ def _prepare_lm_inputs_labels(vectorize_layer: layers.TextVectorization) -> typi
     word at position (i+1). The model will use all words up till position (i)
     to predict the next word.
     """
+
     def _inner(text: str) -> typing.Tuple[str, str]:
         text = tf.expand_dims(text, -1)
         tokenized_sentences = vectorize_layer(text)
         x = tokenized_sentences[:, :-1]
         y = tokenized_sentences[:, 1:]
         return x, y
+
     return _inner
-
-
-
-
-

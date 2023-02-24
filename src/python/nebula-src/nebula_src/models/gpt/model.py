@@ -1,14 +1,7 @@
-import tensorflow as tf
 import keras
+import tensorflow as tf
 from keras import layers
 
-import numpy as np
-import os
-import re
-import string
-import random
-
-import typing
 from nebula_src.models import typing as models_typing
 
 
@@ -23,9 +16,7 @@ def causal_attention_mask(batch_size: int, n_dest: int, n_src: int, dtype: tf.DT
     m = i >= j - n_src + n_dest
     mask = tf.cast(m, dtype)
     mask = tf.reshape(mask, [1, n_dest, n_src])
-    mult = tf.concat(
-        [tf.expand_dims(batch_size, -1), tf.constant([1, 1], dtype=tf.int32)], 0
-    )
+    mult = tf.concat([tf.expand_dims(batch_size, -1), tf.constant([1, 1], dtype=tf.int32)], 0)
     return tf.tile(mask, mult)
 
 
@@ -34,7 +25,10 @@ class TransformerBlock(layers.Layer):
         super().__init__()
         self.att = layers.MultiHeadAttention(num_heads, embed_dim)
         self.ffn = keras.Sequential(
-            [layers.Dense(ff_dim, activation="relu"), layers.Dense(embed_dim),]
+            [
+                layers.Dense(ff_dim, activation="relu"),
+                layers.Dense(embed_dim),
+            ]
         )
         self.layer_norm1 = layers.LayerNormalization(epsilon=1e-6)
         self.layer_norm2 = layers.LayerNormalization(epsilon=1e-6)
@@ -68,9 +62,6 @@ class TokenAndPositionEmbedding(layers.Layer):
         return x + positions
 
 
-
-
-
 def create_model(embed_dim: int, feed_forward_dim: int, max_seq_size: int, num_heads: int, vocab_size: int) -> keras.Model:
     """
 
@@ -91,6 +82,7 @@ def create_model(embed_dim: int, feed_forward_dim: int, max_seq_size: int, num_h
     model = keras.Model(inputs=inputs, outputs=[outputs, x])
     loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
     model.compile(
-        "adam", loss=[loss_fn, None],
+        "adam",
+        loss=[loss_fn, None],
     )  # No loss and optimization based on word embeddings from transformer block
     return model

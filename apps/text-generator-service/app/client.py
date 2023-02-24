@@ -1,14 +1,13 @@
 import logging
-import random
-import sys
 import pathlib
+import sys
+
 import grpc
 
 sys.path.append(str(pathlib.Path(__file__).parents[1]))  # isort:skip
 
-import text_generator_pb2
-import text_generator_pb2_grpc
-
+import text_generator_pb2  # noqa: E402
+import text_generator_pb2_grpc  # noqa: E402
 
 
 def make_text_generator_request():
